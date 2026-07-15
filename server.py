@@ -412,10 +412,9 @@ async def get_auth_url(state: str = ""):
         "client_id": FB_APP_ID,
         "redirect_uri": OAUTH_REDIRECT_URI,
         "scope": ",".join([
-            "instagram_basic", "instagram_manage_comments", "instagram_manage_insights",
+            "instagram_basic", "instagram_manage_insights",
             "instagram_manage_messages", "instagram_content_publish",
-            "pages_show_list", "pages_read_engagement", "pages_manage_engagement",
-            "business_management",
+            "pages_show_list", "pages_read_engagement",
         ]),
         "response_type": "code",
         "state": state,
