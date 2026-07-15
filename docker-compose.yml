@@ -1,12 +1,16 @@
 services:
   instagram-mcp-proxy:
     build: .
-    container_name: instagram-mcp-proxy
     restart: unless-stopped
-    ports:
-      - "8001:8001"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.instagram-mcp-proxy.rule=Host(`instagram-mcp-proxy.timothykosakoy.com`)"
+      - "traefik.http.routers.instagram-mcp-proxy.entrypoints=websecure"
+      - "traefik.http.routers.instagram-mcp-proxy.tls.certresolver=letsencrypt"
+      - "traefik.http.services.instagram-mcp-proxy.loadbalancer.server.port=8001"
+
+networks:
+  dokploy-network:
+    external: true
