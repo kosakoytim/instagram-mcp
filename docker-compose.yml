@@ -2,6 +2,8 @@ services:
   instagram-mcp-proxy:
     build: .
     restart: unless-stopped
+    env_file:
+      - .env
     networks:
       - dokploy-network
     labels:
